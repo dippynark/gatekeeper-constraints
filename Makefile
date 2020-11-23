@@ -14,7 +14,7 @@ test:
 	opa test opa -v
 
 docs:
-	konstraint doc opa --output opa/policies.md
+	konstraint doc opa --output opa/README.md
 
 opa/lib:
 	# Download rego library
