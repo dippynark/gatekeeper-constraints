@@ -1,0 +1,16 @@
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y \
+  curl \
+  git \
+  docker.io
+
+ARG KPT_VERSION
+RUN curl -LO "https://github.com/GoogleContainerTools/kpt/releases/download/v${KPT_VERSION}/kpt_linux_amd64-${KPT_VERSION}.tar.gz" && \
+  tar xzf "kpt_linux_amd64-${KPT_VERSION}.tar.gz" && \
+  chmod +x kpt && \
+  mv kpt /usr/local/bin
+
+WORKDIR /workspace
+
+ENTRYPOINT ["/usr/local/bin/kpt"]

@@ -45,13 +45,13 @@ Ensure Docker and make are installed.
 
 ```sh
 # Run Rego unit tests
-make docker_test
+make test
 # Generate configs and Gatekeeper constraints and output them to the configs directory
-make docker_generate
+make generate
 # Validate configs against constraints
-make docker_validate
+make validate
 # Now try invalidating a constraint...
-make docker_patch
+make patch
 # ...and rerunning everything to show violations
-make docker_all
+make all
 ```
