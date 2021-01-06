@@ -81,17 +81,13 @@ generate: docker_build_helm docker_build_konstraint docker_build_jx docker_build
 validate: docker_build_kpt
 	# https://googlecontainertools.github.io/kpt/guides/consumer/function/
 	# https://googlecontainertools.github.io/kpt/guides/consumer/function/catalog/validators/
-	# Unfortunately the validation modifies the configs (slightly) so we validate a copy instead. An
-	# alternative would be to pipe the input configs to kpt (using kpt) instead of referencing the
-	# configs directory, but this is a bit tricky with the way we're running commands with Docker:
-	# kpt fn source $(CONFIGS_DIR) | kpt fn run --image gcr.io/kpt-functions/gatekeeper-validate >/dev/null
-	rm -rf $(CONFIGS_DIR)-validate
-	cp -a $(CONFIGS_DIR) $(CONFIGS_DIR)-validate
 	docker run -it \
 		-v $(CURDIR):/workspace \
-		-v /var/run/docker.sock:/var/run/docker.sock \
-		kpt:$(KPT_VERSION) fn run $(CONFIGS_DIR)-validate --image gcr.io/kpt-functions/gatekeeper-validate
-	rm -r $(CONFIGS_DIR)-validate
+		kpt:$(KPT_VERSION) fn source $(CONFIGS_DIR) | \
+		docker run -i \
+			-v $(CURDIR):/workspace \
+			-v /var/run/docker.sock:/var/run/docker.sock \
+			kpt:$(KPT_VERSION) fn run --image gcr.io/kpt-functions/gatekeeper-validate >/dev/null
 
 patch: docker_build_kubectl
 	docker run -it \
