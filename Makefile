@@ -60,10 +60,11 @@ generate: docker_build_helm docker_build_konstraint docker_build_jx docker_build
 	docker run -it \
 		-v $(CURDIR):/workspace \
 		helm:$(HELM_VERSION) template charts/nginx --output-dir $(STAGING_DIR)
-	# Generate constraints
+	# Generate constraint configs
 	docker run -it \
 		-v $(CURDIR):/workspace \
 		konstraint:$(KONSTRAINT_VERSION) create opa --output $(STAGING_DIR)
+	# Strucuture configs
 	docker run -it \
 		-v $(CURDIR):/workspace \
 		jx:$(JX_VERSION) gitops split -d $(STAGING_DIR)
@@ -80,8 +81,9 @@ generate: docker_build_helm docker_build_konstraint docker_build_jx docker_build
 validate: docker_build_kpt
 	# https://googlecontainertools.github.io/kpt/guides/consumer/function/
 	# https://googlecontainertools.github.io/kpt/guides/consumer/function/catalog/validators/
-	# Unfortunately the validation modifies the configs (slightly) so we copy first
-	# An alternative would be to pipe the input configs (but this is a bit tricky with the way we're running commands with Docker):
+	# Unfortunately the validation modifies the configs (slightly) so we validate a copy instead. An
+	# alternative would be to pipe the input configs to kpt (using kpt) instead of referencing the
+	# configs directory, but this is a bit tricky with the way we're running commands with Docker:
 	# kpt fn source $(CONFIGS_DIR) | kpt fn run --image gcr.io/kpt-functions/gatekeeper-validate >/dev/null
 	rm -rf $(CONFIGS_DIR)-validate
 	cp -a $(CONFIGS_DIR) $(CONFIGS_DIR)-validate
