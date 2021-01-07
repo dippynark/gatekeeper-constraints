@@ -7,6 +7,7 @@ KONSTRAINT_VERSION = 0.10.0
 JX_VERSION = 3.0.694
 KPT_VERSION = 0.37.0
 KUBECTL_VERSION = 1.19.6
+ISTIOCTL_VERSION = 1.8.0
 
 all: test generate validate
 
@@ -44,6 +45,9 @@ docker_build_kpt:
 docker_build_kubectl:
 	docker build --build-arg KUBECTL_VERSION=$(KUBECTL_VERSION) -t kubectl:$(KUBECTL_VERSION) -f docker/Dockerfile.kubectl .
 
+docker_build_istioctl:
+	docker build --build-arg ISTIOCTL_VERSION=$(ISTIOCTL_VERSION) -t istioctl:$(ISTIOCTL_VERSION) -f docker/Dockerfile.istioctl .
+
 docker_build_move:
 	docker build -t move -f docker/Dockerfile.move .
 
@@ -53,13 +57,16 @@ test: docker_build_opa
 		-v $(CURDIR):/workspace \
 		opa:$(OPA_VERSION) test opa -v
 
-generate: docker_build_helm docker_build_konstraint docker_build_jx docker_build_move
+generate: docker_build_helm docker_build_konstraint docker_build_jx docker_build_move docker_build_istioctl
 	rm -rf $(CONFIGS_DIR) $(STAGING_DIR)
 	mkdir -p $(CONFIGS_DIR) $(STAGING_DIR)
 	# Generate configs
 	docker run -it \
 		-v $(CURDIR):/workspace \
 		helm:$(HELM_VERSION) template charts/nginx --output-dir $(STAGING_DIR)
+	docker run -it \
+		-v $(CURDIR):/workspace \
+		istioctl:$(ISTIOCTL_VERSION) manifest generate | tr -d '\r' > $(STAGING_DIR)/istio.yaml
 	# Generate constraint configs
 	docker run -it \
 		-v $(CURDIR):/workspace \
