@@ -1,4 +1,5 @@
 controller:
+  testEnabled: false
   overwritePlugins: true
   additionalPlugins:
   - pipeline-model-definition:1.3.7
