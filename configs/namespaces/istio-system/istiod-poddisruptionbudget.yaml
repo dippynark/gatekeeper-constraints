@@ -1,0 +1,18 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: istiod
+  namespace: istio-system
+  labels:
+    app: istiod
+    istio.io/rev: default
+    install.operator.istio.io/owning-resource: unknown
+    operator.istio.io/component: "Pilot"
+    release: istio
+    istio: pilot
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: istiod
+      istio: pilot
