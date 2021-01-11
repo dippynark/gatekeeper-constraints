@@ -25,7 +25,7 @@ spec:
         "app.kubernetes.io/instance": "jenkins"
         "app.kubernetes.io/component": "jenkins-controller"
       annotations:
-        checksum/config: 2a4c2b3ea5dea271cb7c0b8e8582b682814d39f8e933e0348725b0b9a7dbf258
+        checksum/config: a85c9b243f978fa7f9ed69a941c92584af325c6fb5802e28e426ebbd70dc400a
     spec:
       securityContext:
         runAsUser: 1000
