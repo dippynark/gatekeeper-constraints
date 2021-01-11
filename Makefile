@@ -68,6 +68,8 @@ generate: docker_build_helm docker_build_konstraint docker_build_jx docker_build
 	docker run -it \
 		-v $(CURDIR):/workspace \
 		istioctl:$(ISTIOCTL_VERSION) manifest generate | tr -d '\r' > $(STAGING_DIR)/istio.yaml
+	curl -L https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.yaml -o $(STAGING_DIR)/cert-manager
+	cp -r raw $(STAGING_DIR)
 	# Generate constraint configs
 	docker run -it \
 		-v $(CURDIR):/workspace \
