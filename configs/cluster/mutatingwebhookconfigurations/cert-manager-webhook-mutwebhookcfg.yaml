@@ -10,26 +10,26 @@ metadata:
     app.kubernetes.io/name: webhook
   name: cert-manager-webhook
 webhooks:
-- admissionReviewVersions:
-  - v1
-  - v1beta1
-  clientConfig:
-    service:
-      name: cert-manager-webhook
-      namespace: cert-manager
-      path: /mutate
-  failurePolicy: Fail
-  name: webhook.cert-manager.io
-  rules:
-  - apiGroups:
-    - cert-manager.io
-    - acme.cert-manager.io
-    apiVersions:
-    - '*'
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - '*/*'
-  sideEffects: None
-  timeoutSeconds: 10
+  - admissionReviewVersions:
+      - v1
+      - v1beta1
+    clientConfig:
+      service:
+        name: cert-manager-webhook
+        namespace: cert-manager
+        path: /mutate
+    failurePolicy: Fail
+    name: webhook.cert-manager.io
+    rules:
+      - apiGroups:
+          - cert-manager.io
+          - acme.cert-manager.io
+        apiVersions:
+          - '*'
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - '*/*'
+    sideEffects: None
+    timeoutSeconds: 10
