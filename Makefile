@@ -63,7 +63,8 @@ generate: docker_build_helm docker_build_konstraint docker_build_jx docker_build
 	# Generate configs
 	docker run -it \
 		-v $(CURDIR):/workspace \
-		helm:$(HELM_VERSION) template charts/nginx --output-dir $(STAGING_DIR)
+		--entrypoint=/workspace/scripts/helm.sh \
+		helm:$(HELM_VERSION) $(STAGING_DIR)
 	docker run -it \
 		-v $(CURDIR):/workspace \
 		istioctl:$(ISTIOCTL_VERSION) manifest generate | tr -d '\r' > $(STAGING_DIR)/istio.yaml
