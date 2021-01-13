@@ -7,4 +7,4 @@ controller:
   - workflow-aggregator:2.6
   - git:4.5.2
   - configuration-as-code:1.46
-  - ghprb:1.42.1
+  - ghprb:1.42.0
