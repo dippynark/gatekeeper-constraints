@@ -3,7 +3,7 @@ def UUID = UUID.randomUUID().toString()
 pipeline {
   agent {
     kubernetes {
-      label "kind-$UUID"
+      label "generate-$UUID"
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
@@ -22,7 +22,7 @@ spec:
     stage('test') {
       steps {
         container('opa') {
-          echo 'test'
+          opa test opa -v
         }
       }
     }
