@@ -4,7 +4,7 @@ def HELM_VERSION = "3.4.2"
 def ISTIOCTL_VERSION = "1.8.0"
 def YQ_VERSION = "4.4.1"
 def KONSTRAINT_VERSION = "0.10.0"
-def JX_VERSION = "3.0.694"
+def JX_VERSION = "3.1.137"
 def MOVE_VERSION = "0.0.1"
 def KPT_VERSION = "0.37.0"
 def GATEKEEPER_VALIDATE_VERSION = "release-kpt-functions-v0.14.5"
@@ -60,6 +60,7 @@ spec:
     - infinity
   - name: jx
     image: dippynark/jx:${JX_VERSION}
+    imagePullPolicy: Always
     env:
     - name: HOME
       value: /home/jenkins/agent
