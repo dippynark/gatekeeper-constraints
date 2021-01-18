@@ -11,7 +11,7 @@ kind: Pod
 spec:
   containers:
   - name: opa
-    image: busybox
+    image: dippynark/opa:0.25.2
     command:
     - sleep
     - infinity
@@ -21,8 +21,8 @@ spec:
   stages {
     stage('test') {
       steps {
-        container('busybox') {
-          echo 'test'
+        container('opa') {
+          opa test opa -v
         }        
       }
     }
