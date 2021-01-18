@@ -16,7 +16,7 @@ spec:
     - sleep
     - infinity
   - name: opa
-    image: dippynark/opa:${OPA_VERSION}
+    image: dippynark/opa:0.25.2
     command:
     - sleep
     - infinity
@@ -57,11 +57,11 @@ spec:
     CONFIGS_DIR = 'configs'
     STAGING_DIR = 'staging'
 
-    OPA_VERSION = 0.25.2
-    HELM_VERSION = 3.4.2
-    ISTIOCTL_VERSION = 1.8.0
-    CERT_MANAGER_VERSION = 1.1.0
-    YQ_VERSION = 4.4.1
+    OPA_VERSION = "0.25.2"
+    HELM_VERSION = "3.4.2"
+    ISTIOCTL_VERSION = "1.8.0"
+    CERT_MANAGER_VERSION = "1.1.0"
+    YQ_VERSION = "4.4.1"
   }
   stages {
     stage('test') {
