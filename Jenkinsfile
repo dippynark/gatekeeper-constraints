@@ -12,6 +12,7 @@ spec:
   containers:
   - name: opa
     image: busybox
+    stdin: True
     command:
     - /bin/cat
 """
