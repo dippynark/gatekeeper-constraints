@@ -23,6 +23,7 @@ metadata:
   labels:
     name: generate-${UUID}
 spec:
+  serviceAccountName: generate
   containers:
   - name: busybox
     image: busybox:${BUSYBOX_VERSION}
@@ -60,8 +61,8 @@ spec:
   - name: jx
     image: dippynark/jx:${JX_VERSION}
     env:
-    - name: XDG_CONFIG_HOME
-      value: test
+    - name: HOME
+      value: /home/jenkins/agent
     command:
     - sleep
     - infinity
@@ -155,7 +156,8 @@ spec:
     stage('push') {
       steps {
         container('jx') {
-          sh "pwd"
+          sh "jx gitops git setup --secret git-auth"
+          sh "jx gitops apply --pull-request"
         }
       }
     }
