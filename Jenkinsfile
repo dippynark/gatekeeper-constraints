@@ -16,7 +16,7 @@ spec:
     - sleep
     - infinity
   - name: opa
-    image: dippynark/opa:0.25.2
+    image: dippynark/opa:${OPA_VERSION}
     command:
     - sleep
     - infinity
@@ -56,6 +56,12 @@ spec:
   environment {
     CONFIGS_DIR = 'configs'
     STAGING_DIR = 'staging'
+
+    OPA_VERSION = 0.25.2
+    HELM_VERSION = 3.4.2
+    ISTIOCTL_VERSION = 1.8.0
+    CERT_MANAGER_VERSION = 1.1.0
+    YQ_VERSION = 4.4.1
   }
   stages {
     stage('test') {
@@ -80,7 +86,11 @@ spec:
           sh "istioctl manifest generate > ${STAGING_DIR}/istio.yaml"
         }
         container('yq') {
-          sh "curl -L https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.yaml | yq delete -d'*' - status > ${STAGING_DIR}/cert-manager.yaml"
+          sh """
+            curl -LO https://github.com/jetstack/cert-manager/releases/download/v${CERT_MANAGER_VERSION}/cert-manager.yaml
+            yq eval -i 'del(.status)' cert-manager.yaml
+            mv cert-manager.yaml ${STAGING_DIR}/cert-manager.yaml
+          """
         }
         container('konstraint') {
           sh "konstraint create opa --output ${STAGING_DIR}"
