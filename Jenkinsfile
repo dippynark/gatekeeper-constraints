@@ -6,17 +6,21 @@ def YQ_VERSION = "4.4.1"
 def KONSTRAINT_VERSION = "0.10.0"
 def JX_VERSION = "3.0.694"
 def MOVE_VERSION = "0.0.1"
+def KPT_VERSION = "0.37.0"
+def GATEKEEPER_VALIDATE_VERSION = "release-kpt-functions-v0.14.5"
 
 // Prevent Jenkins reusing agent YAML
 def UUID = UUID.randomUUID().toString()
 pipeline {
   agent {
     kubernetes {
-      label "generate-${UUID}"
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
 kind: Pod
+metadata:
+  labels:
+    name: generate-${UUID}
 spec:
   containers:
   - name: busybox
@@ -56,6 +60,16 @@ spec:
     - infinity
   - name: move
     image: dippynark/move:${MOVE_VERSION}
+    command:
+    - sleep
+    - infinity
+  - name: kpt
+    image: dippynark/kpt:${KPT_VERSION}
+    command:
+    - sleep
+    - infinity
+  - name: gatekeeper-validate
+    image: dippynark/gatekeeper_validate:${GATEKEEPER_VALIDATE_VERSION}
     command:
     - sleep
     - infinity
@@ -115,6 +129,19 @@ spec:
         }
         container('busybox') {
           sh "rm -r ${STAGING_DIR}"
+        }
+      }
+    }
+    stage('validate') {
+      steps {
+        container('kpt') {
+          sh "kpt fn source ${CONFIGS_DIR} > configs.yaml"
+        }
+        container('gatekeeper-validate') {
+          sh "gatekeeper_validate --input configs.yaml >/dev/null"
+        }
+        container('busybox') {
+          sh "rm configs.yaml"
         }
       }
     }
