@@ -9,7 +9,7 @@ ISTIOCTL_VERSION = 1.8.0
 CERT_MANAGER_VERSION = 1.1.0
 YQ_VERSION = 4.4.1
 KONSTRAINT_VERSION = 0.10.0
-JX_VERSION = 3.0.694
+JX_VERSION = 3.1.137
 MOVE_VERSION = 0.0.1
 KPT_VERSION = 0.37.0
 GATEKEEPER_VALIDATE_VERSION = release-kpt-functions-v0.14.5
@@ -99,6 +99,14 @@ validate:
 		docker run -i \
 			-v $(CURDIR):/workspace \
 			$(REPOSITORY)/gatekeeper_validate:$(GATEKEEPER_VALIDATE_VERSION) >/dev/null
+
+pr-regen:
+	-git add --all
+	-git status
+	# lets ignore commit errors in case there's no changes and to stop pipelines failing
+	-git commit -m "generated"
+	# lets push changes to the Pull Request branch
+	jx gitops pr push --ignore-no-pr --source-url https://github.com/dippynark/gatekeeper.git
 
 patch:
 	docker run -it \
