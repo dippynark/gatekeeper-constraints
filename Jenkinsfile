@@ -161,7 +161,7 @@ spec:
             jx gitops git setup --secret git-auth
             git add --all
 	          git status
-	          git commit -m "generated"
+	          git commit -m "generated" || true
             git push origin HEAD:${ghprbSourceBranch}
           """
         }
