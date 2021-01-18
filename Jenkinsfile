@@ -23,7 +23,7 @@ spec:
       steps {
         container('opa') {
           opa test opa -v
-        }        
+        }
       }
     }
   }
