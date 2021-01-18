@@ -21,7 +21,7 @@ spec:
     stage('test') {
       steps {
         container('busybox') {
-          echo 'test'
+          echo 'test 2'
         }        
       }
     }
