@@ -62,7 +62,7 @@ spec:
     image: dippynark/jx:${JX_VERSION}
     imagePullPolicy: Always
     env:
-    - name: HOME
+    - name: XDG_CONFIG_HOME
       value: /home/jenkins/agent
     command:
     - sleep
@@ -157,9 +157,13 @@ spec:
     stage('push') {
       steps {
         container('jx') {
-          sh "tail -f /dev/null"
-          sh "jx gitops git setup --secret git-auth"
-          sh "jx gitops apply --pull-request"
+          sh """
+            jx gitops git setup --secret git-auth
+            git add --all
+	          git status
+	          git commit -m "generated"
+            git push origin HEAD:${ghprbSourceBranch}
+          """
         }
       }
     }
