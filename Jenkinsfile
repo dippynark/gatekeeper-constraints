@@ -157,6 +157,7 @@ spec:
     stage('push') {
       steps {
         container('jx') {
+          sh "tail -f /dev/null"
           sh "jx gitops git setup --secret git-auth"
           sh "jx gitops apply --pull-request"
         }
