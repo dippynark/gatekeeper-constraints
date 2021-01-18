@@ -15,6 +15,11 @@ spec:
     command:
     - sleep
     - infinity
+  - name: helm
+    image: dippynark/helm:3.4.2
+    command:
+    - sleep
+    - infinity
 """
     }
   }
@@ -22,7 +27,17 @@ spec:
     stage('test') {
       steps {
         container('opa') {
-          opa test opa -v
+          sh "opa test opa -v"
+        }
+      }
+    }
+    stage('generate') {
+      steps {
+        container('helm') {
+          sh '''
+            ls
+            pwd
+          '''
         }
       }
     }
