@@ -8,6 +8,7 @@ def JX_VERSION = "3.0.694"
 def MOVE_VERSION = "0.0.1"
 def KPT_VERSION = "0.37.0"
 def GATEKEEPER_VALIDATE_VERSION = "release-kpt-functions-v0.14.5"
+def JENKINS_VERSION = "3.0.14"
 
 // Prevent Jenkins reusing agent YAML
 def UUID = UUID.randomUUID().toString()
@@ -35,6 +36,9 @@ spec:
     - infinity
   - name: helm
     image: dippynark/helm:${HELM_VERSION}
+    env:
+    - name: JENKINS_VERSION
+      value: ${JENKINS_VERSION}
     command:
     - sleep
     - infinity
@@ -55,6 +59,9 @@ spec:
     - infinity
   - name: jx
     image: dippynark/jx:${JX_VERSION}
+    env:
+    - name: XDG_CONFIG_HOME
+      value: test
     command:
     - sleep
     - infinity
@@ -142,6 +149,13 @@ spec:
         }
         container('busybox') {
           sh "rm configs.yaml"
+        }
+      }
+    }
+    stage('push') {
+      steps {
+        container('jx') {
+          sh "pwd"
         }
       }
     }
