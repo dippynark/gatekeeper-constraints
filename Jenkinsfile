@@ -10,13 +10,10 @@ apiVersion: v1
 kind: Pod
 spec:
   containers:
-  - name: busybox
+  - name: opa
     image: busybox
     command:
-    - sh
-    - -c
-    - |
-      tail -f /dev/null
+    - /bin/cat
 """
     }
   }
