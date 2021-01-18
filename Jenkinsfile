@@ -13,7 +13,10 @@ spec:
   - name: busybox
     image: busybox
     command:
-    - cat
+    - sh
+    - -c
+    - |
+      tail -f /dev/null
 """
     }
   }
@@ -21,7 +24,7 @@ spec:
     stage('test') {
       steps {
         container('busybox') {
-          echo 'test 2'
+          echo 'test'
         }        
       }
     }
