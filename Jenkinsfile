@@ -1,9 +1,18 @@
+def BUSYBOX_VERSION = "1.32"
+def OPA_VERSION = "0.25.2"
+def HELM_VERSION = "3.4.2"
+def ISTIOCTL_VERSION = "1.8.0"
+def YQ_VERSION = "4.4.1"
+def KONSTRAINT_VERSION = "0.10.0"
+def JX_VERSION = "3.0.694"
+def MOVE_VERSION = "0.0.1"
+
 // Prevent Jenkins reusing agent YAML
 def UUID = UUID.randomUUID().toString()
 pipeline {
   agent {
     kubernetes {
-      label "generate-$UUID"
+      label "generate-${UUID}"
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
@@ -11,42 +20,42 @@ kind: Pod
 spec:
   containers:
   - name: busybox
-    image: busybox:1.32
+    image: busybox:${BUSYBOX_VERSION}
     command:
     - sleep
     - infinity
   - name: opa
-    image: dippynark/opa:0.25.2
+    image: dippynark/opa:${OPA_VERSION}
     command:
     - sleep
     - infinity
   - name: helm
-    image: dippynark/helm:3.4.2
+    image: dippynark/helm:${HELM_VERSION}
     command:
     - sleep
     - infinity
   - name: istioctl
-    image: dippynark/istioctl:1.8.0
+    image: dippynark/istioctl:${ISTIOCTL_VERSION}
     command:
     - sleep
     - infinity
   - name: yq
-    image: dippynark/yq:4.4.1
+    image: dippynark/yq:${YQ_VERSION}
     command:
     - sleep
     - infinity
   - name: konstraint
-    image: dippynark/konstraint:0.10.0
+    image: dippynark/konstraint:${KONSTRAINT_VERSION}
     command:
     - sleep
     - infinity
   - name: jx
-    image: dippynark/jx:3.0.694
+    image: dippynark/jx:${JX_VERSION}
     command:
     - sleep
     - infinity
   - name: move
-    image: dippynark/move:0.0.1
+    image: dippynark/move:${MOVE_VERSION}
     command:
     - sleep
     - infinity
@@ -57,11 +66,7 @@ spec:
     CONFIGS_DIR = 'configs'
     STAGING_DIR = 'staging'
 
-    OPA_VERSION = "0.25.2"
-    HELM_VERSION = "3.4.2"
-    ISTIOCTL_VERSION = "1.8.0"
     CERT_MANAGER_VERSION = "1.1.0"
-    YQ_VERSION = "4.4.1"
   }
   stages {
     stage('test') {
