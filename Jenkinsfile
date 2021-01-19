@@ -161,8 +161,7 @@ spec:
       steps {
         container('jx') {
           sh """
-            tail -f /dev/null
-            jx gitops git setup --secret git-auth --email ${ghprbActualCommitAuthorEmail}
+            jx gitops git setup --secret git-auth --email ${GIT_AUTHOR_EMAIL}
             git add --all
 	          git status
 	          git commit -m "generated" || true
