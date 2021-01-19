@@ -100,14 +100,6 @@ validate:
 			-v $(CURDIR):/workspace \
 			$(REPOSITORY)/gatekeeper_validate:$(GATEKEEPER_VALIDATE_VERSION) >/dev/null
 
-pr-regen:
-	-git add --all
-	-git status
-	# lets ignore commit errors in case there's no changes and to stop pipelines failing
-	-git commit -m "generated"
-	# lets push changes to the Pull Request branch
-	jx gitops pr push --ignore-no-pr --source-url https://github.com/dippynark/gatekeeper.git
-
 patch:
 	docker run -it \
 		-v $(CURDIR):/workspace \

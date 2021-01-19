@@ -120,6 +120,9 @@ spec:
             mv cert-manager.yaml ${STAGING_DIR}/cert-manager.yaml
           """
         }
+        container('busybox') {
+          sh "cp -r raw ${STAGING_DIR}"
+        }
         container('konstraint') {
           sh "konstraint create opa --output ${STAGING_DIR}"
         }

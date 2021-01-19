@@ -44,6 +44,8 @@ README.md
 Ensure Docker and make are installed.
 
 ```sh
+# Build dependent Docker images
+make docker_build
 # Run Rego unit tests
 make test
 # Generate configs and Gatekeeper constraints and output them to the configs directory
