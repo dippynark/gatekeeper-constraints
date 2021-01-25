@@ -11,9 +11,6 @@ information.
 ```sh
 # Helm charts (or any configuration to be hydrated)
 charts/
-cmd/
-  # Binary that takes an input directory of hydrated configs and outputs them to the configs structure
-  move/
 # Hydrated configs in a structured format to be synced to a Kubernetes cluster
 configs/
   # Non-namespaced resources separated into directories per resource kind
@@ -24,13 +21,22 @@ configs/
   namespaces/
     kube-system/
     ...
+# Docker images used for config generation and validation
+docker/
 # Rego files and unit tests
 opa/
-# Docker image containing dependecies for testing, generating and validating policies and configs
-Dockerfile
-# Golang depencies for `cmd` binaries
-go.mod
-go.sum
+# Configs to be copied into the `configs` directory without hydration
+raw/
+# Scripts for config generation and validation
+scripts/
+# Ignored files
+.gitignore
+# Cached API Server discovery information used by kfmt
+api-resources.txt
+# ACM configuration
+config-management.yaml
+# Jenkinsfile for running generation and validation as part of CI
+Jenkinsfile
 # Orchestrates config generation and validation
 Makefile
 # Patch to invalidate Rego policy for demo purposes
