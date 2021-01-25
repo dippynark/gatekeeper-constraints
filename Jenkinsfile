@@ -100,6 +100,7 @@ spec:
   stages {
     stage('checkout') {
       steps {
+        // TODO: checkout master and merge PR
         git url: 'https://github.com/dippynark/gatekeeper.git', branch: "${ghprbSourceBranch}"
       }
     }
