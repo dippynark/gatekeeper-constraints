@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: pods
+  annotations:
+    kfmt.dev/namespaces: "*"
+  namespace: jenkins
+spec:
+  hard:
+    pods: "10"
