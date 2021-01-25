@@ -4,10 +4,11 @@ def HELM_VERSION = "3.4.2"
 def ISTIOCTL_VERSION = "1.8.0"
 def YQ_VERSION = "4.4.1"
 def KONSTRAINT_VERSION = "0.10.0"
-def JX_VERSION = "3.1.137"
+def KFMT_VERSION = "0e98a09b10943d20b409666ae68cfec902a86605"
 def MOVE_VERSION = "0.0.1"
 def KPT_VERSION = "0.37.0"
 def GATEKEEPER_VALIDATE_VERSION = "release-kpt-functions-v0.14.5"
+def JX_VERSION = "3.1.137"
 def JENKINS_VERSION = "3.0.14"
 
 // Prevent Jenkins reusing agent YAML
@@ -58,17 +59,8 @@ spec:
     command:
     - sleep
     - infinity
-  - name: jx
-    image: dippynark/jx:${JX_VERSION}
-    imagePullPolicy: Always
-    env:
-    - name: XDG_CONFIG_HOME
-      value: /home/jenkins/agent
-    command:
-    - sleep
-    - infinity
-  - name: move
-    image: dippynark/move:${MOVE_VERSION}
+  - name: kfmt
+    image: dippynark/kfmt:${KFMT_VERSION}
     command:
     - sleep
     - infinity
@@ -79,6 +71,15 @@ spec:
     - infinity
   - name: gatekeeper-validate
     image: dippynark/gatekeeper_validate:${GATEKEEPER_VALIDATE_VERSION}
+    command:
+    - sleep
+    - infinity
+  - name: jx
+    image: dippynark/jx:${JX_VERSION}
+    imagePullPolicy: Always
+    env:
+    - name: XDG_CONFIG_HOME
+      value: /home/jenkins/agent
     command:
     - sleep
     - infinity
@@ -126,17 +127,12 @@ spec:
         container('konstraint') {
           sh "konstraint create opa --output ${STAGING_DIR}"
         }
-        container('jx') {
+        container('kfmt') {
           sh """
-            jx gitops split -d ${STAGING_DIR}
-            jx gitops rename -d ${STAGING_DIR}
-          """
-        }
-        container('move') {
-          sh """
-            move --input-dir ${STAGING_DIR} \
+            kfmt --input-dir ${STAGING_DIR} \
               --output-dir ${CONFIGS_DIR} \
-              --ignore-kind Secret
+              --filter-kind-group Secret \
+			        --clean
           """
         }
         container('busybox') {

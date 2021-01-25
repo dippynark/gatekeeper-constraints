@@ -1,0 +1,97 @@
+NAME                              SHORTNAMES   APIVERSION                             NAMESPACED   KIND
+bindings                                       v1                                     true         Binding
+componentstatuses                 cs           v1                                     false        ComponentStatus
+configmaps                        cm           v1                                     true         ConfigMap
+endpoints                         ep           v1                                     true         Endpoints
+events                            ev           v1                                     true         Event
+limitranges                       limits       v1                                     true         LimitRange
+namespaces                        ns           v1                                     false        Namespace
+nodes                             no           v1                                     false        Node
+persistentvolumeclaims            pvc          v1                                     true         PersistentVolumeClaim
+persistentvolumes                 pv           v1                                     false        PersistentVolume
+pods                              po           v1                                     true         Pod
+podtemplates                                   v1                                     true         PodTemplate
+replicationcontrollers            rc           v1                                     true         ReplicationController
+resourcequotas                    quota        v1                                     true         ResourceQuota
+secrets                                        v1                                     true         Secret
+serviceaccounts                   sa           v1                                     true         ServiceAccount
+services                          svc          v1                                     true         Service
+challenges                                     acme.cert-manager.io/v1                true         Challenge
+orders                                         acme.cert-manager.io/v1                true         Order
+mutatingwebhookconfigurations                  admissionregistration.k8s.io/v1        false        MutatingWebhookConfiguration
+validatingwebhookconfigurations                admissionregistration.k8s.io/v1        false        ValidatingWebhookConfiguration
+customresourcedefinitions         crd,crds     apiextensions.k8s.io/v1                false        CustomResourceDefinition
+apiservices                                    apiregistration.k8s.io/v1              false        APIService
+controllerrevisions                            apps/v1                                true         ControllerRevision
+daemonsets                        ds           apps/v1                                true         DaemonSet
+deployments                       deploy       apps/v1                                true         Deployment
+replicasets                       rs           apps/v1                                true         ReplicaSet
+statefulsets                      sts          apps/v1                                true         StatefulSet
+tokenreviews                                   authentication.k8s.io/v1               false        TokenReview
+localsubjectaccessreviews                      authorization.k8s.io/v1                true         LocalSubjectAccessReview
+selfsubjectaccessreviews                       authorization.k8s.io/v1                false        SelfSubjectAccessReview
+selfsubjectrulesreviews                        authorization.k8s.io/v1                false        SelfSubjectRulesReview
+subjectaccessreviews                           authorization.k8s.io/v1                false        SubjectAccessReview
+horizontalpodautoscalers          hpa          autoscaling/v1                         true         HorizontalPodAutoscaler
+cronjobs                          cj           batch/v1beta1                          true         CronJob
+jobs                                           batch/v1                               true         Job
+certificaterequests               cr,crs       cert-manager.io/v1                     true         CertificateRequest
+certificates                      cert,certs   cert-manager.io/v1                     true         Certificate
+clusterissuers                                 cert-manager.io/v1                     false        ClusterIssuer
+issuers                                        cert-manager.io/v1                     true         Issuer
+certificatesigningrequests        csr          certificates.k8s.io/v1beta1            false        CertificateSigningRequest
+backendconfigs                    bc           cloud.google.com/v1                    true         BackendConfig
+clusters                                       clusterregistry.k8s.io/v1alpha1        true         Cluster
+configs                                        config.gatekeeper.sh/v1alpha1          true         Config
+clusterconfigs                    cr           configmanagement.gke.io/v1             false        ClusterConfig
+clusterselectors                               configmanagement.gke.io/v1             false        ClusterSelector
+configmanagements                              configmanagement.gke.io/v1             false        ConfigManagement
+hierarchyconfigs                               configmanagement.gke.io/v1             false        HierarchyConfig
+namespaceconfigs                  nc           configmanagement.gke.io/v1             false        NamespaceConfig
+namespaceselectors                             configmanagement.gke.io/v1             false        NamespaceSelector
+repos                                          configmanagement.gke.io/v1             false        Repo
+syncs                                          configmanagement.gke.io/v1             false        Sync
+environments                                   configsync.gke.io/v1alpha1             true         Environment
+resourcegroups                                 configsync.gke.io/v1alpha1             true         ResourceGroup
+poddenyhostnetwork                             constraints.gatekeeper.sh/v1beta1      false        PodDenyHostNetwork
+leases                                         coordination.k8s.io/v1                 true         Lease
+ingresses                         ing          extensions/v1beta1                     true         Ingress
+memberships                                    hub.gke.io/v1                          false        Membership
+istiooperators                    iop,io       install.istio.io/v1alpha1              true         IstioOperator
+capacityrequests                  capreq       internal.autoscaling.k8s.io/v1alpha1   true         CapacityRequest
+nodes                                          metrics.k8s.io/v1beta1                 false        NodeMetrics
+pods                                           metrics.k8s.io/v1beta1                 true         PodMetrics
+storagestates                                  migration.k8s.io/v1alpha1              false        StorageState
+storageversionmigrations                       migration.k8s.io/v1alpha1              false        StorageVersionMigration
+frontendconfigs                                networking.gke.io/v1beta1              true         FrontendConfig
+managedcertificates               mcrt         networking.gke.io/v1beta2              true         ManagedCertificate
+destinationrules                  dr           networking.istio.io/v1beta1            true         DestinationRule
+envoyfilters                                   networking.istio.io/v1alpha3           true         EnvoyFilter
+gateways                          gw           networking.istio.io/v1beta1            true         Gateway
+serviceentries                    se           networking.istio.io/v1beta1            true         ServiceEntry
+sidecars                                       networking.istio.io/v1beta1            true         Sidecar
+virtualservices                   vs           networking.istio.io/v1beta1            true         VirtualService
+workloadentries                   we           networking.istio.io/v1beta1            true         WorkloadEntry
+workloadgroups                    wg           networking.istio.io/v1alpha3           true         WorkloadGroup
+ingresses                         ing          networking.k8s.io/v1beta1              true         Ingress
+networkpolicies                   netpol       networking.k8s.io/v1                   true         NetworkPolicy
+runtimeclasses                                 node.k8s.io/v1beta1                    false        RuntimeClass
+updateinfos                       updinf       nodemanagement.gke.io/v1alpha1         true         UpdateInfo
+poddisruptionbudgets              pdb          policy/v1beta1                         true         PodDisruptionBudget
+podsecuritypolicies               psp          policy/v1beta1                         false        PodSecurityPolicy
+clusterrolebindings                            rbac.authorization.k8s.io/v1           false        ClusterRoleBinding
+clusterroles                                   rbac.authorization.k8s.io/v1           false        ClusterRole
+rolebindings                                   rbac.authorization.k8s.io/v1           true         RoleBinding
+roles                                          rbac.authorization.k8s.io/v1           true         Role
+scalingpolicies                                scalingpolicy.kope.io/v1alpha1         true         ScalingPolicy
+priorityclasses                   pc           scheduling.k8s.io/v1                   false        PriorityClass
+authorizationpolicies                          security.istio.io/v1beta1              true         AuthorizationPolicy
+peerauthentications               pa           security.istio.io/v1beta1              true         PeerAuthentication
+requestauthentications            ra           security.istio.io/v1beta1              true         RequestAuthentication
+constraintpodstatuses                          status.gatekeeper.sh/v1beta1           true         ConstraintPodStatus
+constrainttemplatepodstatuses                  status.gatekeeper.sh/v1beta1           true         ConstraintTemplatePodStatus
+csidrivers                                     storage.k8s.io/v1beta1                 false        CSIDriver
+csinodes                                       storage.k8s.io/v1beta1                 false        CSINode
+storageclasses                    sc           storage.k8s.io/v1                      false        StorageClass
+volumeattachments                              storage.k8s.io/v1                      false        VolumeAttachment
+constrainttemplates                            templates.gatekeeper.sh/v1beta1        false        ConstraintTemplate

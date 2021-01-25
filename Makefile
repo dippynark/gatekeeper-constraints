@@ -9,11 +9,11 @@ ISTIOCTL_VERSION = 1.8.0
 CERT_MANAGER_VERSION = 1.1.0
 YQ_VERSION = 4.4.1
 KONSTRAINT_VERSION = 0.10.0
-JX_VERSION = 3.1.137
-MOVE_VERSION = 0.0.1
+KFMT_VERSION = 0e98a09b10943d20b409666ae68cfec902a86605
 KPT_VERSION = 0.37.0
 GATEKEEPER_VALIDATE_VERSION = release-kpt-functions-v0.14.5
 KUBECTL_VERSION = 1.19.6
+JX_VERSION = 3.1.137
 JENKINS_VERSION = 3.0.14
 
 all: test generate validate
@@ -34,14 +34,14 @@ opa/lib:
 	rm -r konstraint
 
 # Docker images
-docker_build: docker_build_helm docker_build_istioctl docker_build_jx docker_build_konstraint docker_build_kpt docker_build_kubectl docker_build_move docker_build_opa docker_build_yq
+docker_build: docker_build_helm docker_build_istioctl docker_build_kfmt docker_build_konstraint docker_build_kpt docker_build_kubectl docker_build_opa docker_build_yq docker_build_jx
 
 docker_build_%:
 	docker build --build-arg $(shell echo $* | tr '[:lower:]' '[:upper:]')_VERSION=$($(shell echo $* | tr '[:lower:]' '[:upper:]')_VERSION) \
 		-t $(REPOSITORY)/$*:$($(shell echo $* | tr '[:lower:]' '[:upper:]')_VERSION) \
 		-f docker/Dockerfile.$* .
 
-docker_push: docker_push_helm docker_push_istioctl docker_push_jx docker_push_konstraint docker_push_kpt docker_push_kubectl docker_push_move docker_push_opa docker_push_yq
+docker_push: docker_push_helm docker_push_istioctl docker_build_kfmt docker_push_konstraint docker_push_kpt docker_push_kubectl docker_push_opa docker_push_yq docker_push_jx
 
 docker_push_%:
 	docker push $(REPOSITORY)/$*:$($(shell echo $* | tr '[:lower:]' '[:upper:]')_VERSION)
@@ -77,15 +77,10 @@ generate:
 	# Strucuture configs
 	docker run -it \
 		-v $(CURDIR):/workspace \
-		$(REPOSITORY)/jx:$(JX_VERSION) gitops split -d $(STAGING_DIR)
-	docker run -it \
-		-v $(CURDIR):/workspace \
-		$(REPOSITORY)/jx:$(JX_VERSION) gitops rename -d $(STAGING_DIR)
-	docker run -it \
-		-v $(CURDIR):/workspace \
-		$(REPOSITORY)/move:$(MOVE_VERSION) --input-dir $(STAGING_DIR) \
+		$(REPOSITORY)/kfmt:$(KFMT_VERSION) --input-dir $(STAGING_DIR) \
 			--output-dir $(CONFIGS_DIR) \
-			--ignore-kind Secret
+			--filter-kind-group Secret \
+			--clean
 	rm -r $(STAGING_DIR)
 
 validate:

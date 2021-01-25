@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: jenkins-lukeaddison-co-uk
+  namespace: istio-system
+spec:
+  secretName: jenkins-lukeaddison-co-uk-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - jenkins.lukeaddison.co.uk
