@@ -170,8 +170,8 @@ spec:
           sh """
             jx gitops git setup --secret git-auth --email lukeaddison.785@gmail.com
             git add --all
-	          git status
-	          git commit -m "Generated" || true
+            git status
+            git commit -m "Generated" || true
             git pull origin ${ghprbSourceBranch} --rebase
             git push origin ${ghprbSourceBranch}
           """
