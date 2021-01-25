@@ -92,7 +92,17 @@ spec:
 
     CERT_MANAGER_VERSION = "1.1.0"
   }
+
+  options {
+    skipDefaultCheckout()
+  }
+
   stages {
+    stage('checkout') {
+      steps {
+        git url: 'https://github.com/dippynark/gatekeeper.git', branch: "${ghprbSourceBranch}"
+      }
+    }
     stage('test') {
       steps {
         container('opa') {
@@ -158,7 +168,6 @@ spec:
         container('jx') {
           sh """
             jx gitops git setup --secret git-auth --email ${GIT_AUTHOR_EMAIL}
-            tail -f /dev/null
             git add --all
 	          git status
 	          git commit -m "Generated" || true
