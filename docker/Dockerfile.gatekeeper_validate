@@ -1,0 +1,18 @@
+FROM golang:1.15.4 as builder
+
+WORKDIR /workspace
+
+ARG GATEKEEPER_VALIDATE_VERSION
+RUN git clone https://github.com/GoogleContainerTools/kpt-functions-sdk \
+  --branch "${GATEKEEPER_VALIDATE_VERSION}"  \
+  --single-branch kpt-functions-sdk
+RUN cd kpt-functions-sdk/go && go mod download
+RUN cd kpt-functions-sdk/go && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a ./cmd/gatekeeper_validate
+
+FROM ubuntu:18.04
+
+COPY --from=builder /workspace/kpt-functions-sdk/go/gatekeeper_validate /usr/local/bin
+
+WORKDIR /workspace
+
+ENTRYPOINT ["/usr/local/bin/gatekeeper_validate"]

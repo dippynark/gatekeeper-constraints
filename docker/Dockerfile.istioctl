@@ -1,0 +1,13 @@
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y curl
+
+ARG ISTIOCTL_VERSION
+RUN curl -LO "https://github.com/istio/istio/releases/download/${ISTIOCTL_VERSION}/istioctl-${ISTIOCTL_VERSION}-linux-amd64.tar.gz" && \
+  tar xvf "istioctl-${ISTIOCTL_VERSION}-linux-amd64.tar.gz" && \
+  chmod 755 ./istioctl && \
+  mv istioctl /usr/local/bin
+
+WORKDIR /workspace
+
+ENTRYPOINT ["/usr/local/bin/istioctl"]

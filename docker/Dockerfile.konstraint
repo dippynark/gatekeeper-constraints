@@ -1,0 +1,12 @@
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y curl
+
+ARG KONSTRAINT_VERSION
+RUN curl -L -o konstraint "https://github.com/plexsystems/konstraint/releases/download/v${KONSTRAINT_VERSION}/konstraint-linux-amd64" && \
+  chmod 755 ./konstraint && \
+  mv konstraint /usr/local/bin
+
+WORKDIR /workspace
+
+ENTRYPOINT ["/usr/local/bin/konstraint"]

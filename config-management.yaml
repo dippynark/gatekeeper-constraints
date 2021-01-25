@@ -1,0 +1,14 @@
+apiVersion: configmanagement.gke.io/v1
+kind: ConfigManagement
+metadata:
+  name: config-management
+spec:
+  sourceFormat: unstructured
+  policyController:
+    enabled: true
+    templateLibraryInstalled: false
+  git:
+    syncRepo: https://github.com/dippynark/gatekeeper.git
+    syncBranch: master
+    secretType: none
+    policyDir: configs

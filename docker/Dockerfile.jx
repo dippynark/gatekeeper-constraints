@@ -1,0 +1,12 @@
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y curl git
+
+ARG JX_VERSION
+RUN curl -L "https://github.com/jenkins-x/jx-cli/releases/download/v${JX_VERSION}/jx-cli-linux-amd64.tar.gz" | tar xzv && \
+  mv jx /usr/local/bin && \
+  jx upgrade plugins
+
+WORKDIR /workspace
+
+ENTRYPOINT ["/usr/local/bin/jx"]

@@ -1,0 +1,12 @@
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y curl
+
+ARG KUBECTL_VERSION
+RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" && \
+  chmod +x ./kubectl && \
+  mv kubectl /usr/local/bin
+
+WORKDIR /workspace
+
+ENTRYPOINT ["/usr/local/bin/kubectl"]
