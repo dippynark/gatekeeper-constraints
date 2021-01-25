@@ -171,7 +171,7 @@ spec:
             git add --all
 	          git status
 	          git commit -m "Generated" || true
-            git push
+            git push origin ${ghprbSourceBranch}
           """
         }
       }
