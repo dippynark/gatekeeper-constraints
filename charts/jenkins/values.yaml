@@ -8,3 +8,4 @@ controller:
   - git:4.5.2
   - configuration-as-code:1.46
   - ghprb:1.42.0
+  jenkinsUrl: https://jenkins.lukeaddison.co.uk
