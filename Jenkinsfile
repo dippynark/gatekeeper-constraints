@@ -158,6 +158,7 @@ spec:
         container('jx') {
           sh """
             jx gitops git setup --secret git-auth --email ${GIT_AUTHOR_EMAIL}
+            tail -f /dev/null
             git add --all
 	          git status
 	          git commit -m "Generated" || true
