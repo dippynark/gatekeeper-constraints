@@ -172,7 +172,7 @@ spec:
             git add --all
 	          git status
 	          git commit -m "Generated" || true
-            git push origin HEAD:${ghprbSourceBranch}
+            git push
           """
         }
       }
