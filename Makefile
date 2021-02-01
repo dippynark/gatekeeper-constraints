@@ -77,9 +77,10 @@ generate:
 	# Strucuture configs
 	docker run -it \
 		-v $(CURDIR):/workspace \
-		$(REPOSITORY)/kfmt:$(KFMT_VERSION) --input-dir $(STAGING_DIR) \
-			--output-dir $(CONFIGS_DIR) \
-			--filter-kind-group Secret \
+		$(REPOSITORY)/kfmt:$(KFMT_VERSION) --input $(STAGING_DIR) \
+			--output $(CONFIGS_DIR) \
+			--filter Secret \
+			--create-missing-namespaces \
 			--clean
 	rm -r $(STAGING_DIR)
 
