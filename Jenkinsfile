@@ -116,7 +116,7 @@ spec:
         container('busybox') {
           sh """
             rm -rf ${CONFIGS_DIR} ${STAGING_DIR}
-            mkdir ${CONFIGS_DIR} ${STAGING_DIR}
+            mkdir -p ${CONFIGS_DIR} ${STAGING_DIR}
           """
         }
         container('helm') {
