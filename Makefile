@@ -22,7 +22,7 @@ all: test generate validate
 opa/README.md:
 	docker run -it \
 		-v $(CURDIR):/workspace \
-		konstraint doc opa --output opa/README.md
+		$(REPOSITORY)/konstraint:$(KONSTRAINT_VERSION) doc opa --output opa/README.md
 
 opa/lib:
 	# Download rego library
