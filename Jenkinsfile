@@ -35,6 +35,9 @@ spec:
         - dockerd
         - --host=unix:///var/run/docker-sock/docker.sock
         - --storage-driver=overlay
+      env:
+      - name: DOCKER_HOST
+        value: unix:///var/run/docker-sock/docker.sock
       securityContext:
         privileged: true
         capabilities:
