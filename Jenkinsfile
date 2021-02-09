@@ -83,8 +83,9 @@ spec:
     stage('test') {
       steps {
         container('dind') {
-          generate(workDir)
-          validate(workDir)
+          sh "sleep 100000000"
+          generate('/home/jenkins/agent')
+          validate('/home/jenkins/agent')
         }
       }
     }
