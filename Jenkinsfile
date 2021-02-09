@@ -18,56 +18,48 @@ spec:
   initContainers:
     - name: install-docker-bin
       command:
-        - /bin/sh
-        - -e
-        - -x
-        - -c
-        - |
-          cp -a \$(which docker) /opt/docker/bin
+      - /bin/sh
+      - -e
+      - -x
+      - -c
+      - |
+        cp -a \$(which docker) /opt/docker/bin
       image: docker:19.03-dind
       volumeMounts:
-        - mountPath: /opt/docker/bin
-          name: docker-bin
+      - mountPath: /opt/docker/bin
+        name: docker-bin
   containers:
     - name: dind
       image: docker:19.03-dind
       command:
-        - dockerd
-        - --host=unix:///var/run/docker-sock/docker.sock
-        - --storage-driver=overlay
-      env:
-      - name: DOCKER_HOST
-        value: unix:///var/run/docker-sock/docker.sock
+      - dockerd
+      - --storage-driver=overlay
       securityContext:
         privileged: true
         capabilities:
           add: ["SYS_ADMIN"]
       volumeMounts:
-        - mountPath: /lib/modules
-          name: modules
-          readOnly: true
-        - mountPath: /sys/fs/cgroup
-          name: cgroup
-        - mountPath: /var/lib/docker
-          name: var-lib-docker
-        - mountPath: /var/run/docker-sock
-          name: docker-sock
+      - mountPath: /lib/modules
+        name: modules
+        readOnly: true
+      - mountPath: /sys/fs/cgroup
+        name: cgroup
+      - mountPath: /var/lib/docker
+        name: var-lib-docker
   volumes:
-    - name: modules
-      hostPath:
-        path: /lib/modules
-        type: Directory
-    - name: cgroup
-      hostPath:
-        path: /sys/fs/cgroup
-        type: Directory
-    - name: var-lib-docker
-      persistentVolumeClaim:
-        claimName: dind-$PVC_ORDINAL
-    - name: docker-bin
-      emptyDir: {}
-    - name: docker-sock
-      emptyDir: {}
+  - name: modules
+    hostPath:
+      path: /lib/modules
+      type: Directory
+  - name: cgroup
+    hostPath:
+      path: /sys/fs/cgroup
+      type: Directory
+  - name: var-lib-docker
+    persistentVolumeClaim:
+      claimName: dind-$PVC_ORDINAL
+  - name: docker-bin
+    emptyDir: {}
 """
     }
   }
@@ -86,9 +78,9 @@ spec:
     stage('test') {
       steps {
         container('dind') {
-          sh "sleep 100000000"
-          generate('/home/jenkins/agent')
-          validate('/home/jenkins/agent')
+          generate(env.WORKSPACE)
+          validate(env.WORKSPACE)
+          sh "sleep 1000000"
         }
       }
     }
