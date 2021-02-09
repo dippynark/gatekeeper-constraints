@@ -1,4 +1,6 @@
-// Prevent Jenkins reusing agent YAML
+// Ordinal to select DinD cache PVC
+def PVC_ORDINAL = "${currentBuild.number.toInteger() % 3}"
+// Prevent jenkins reusing agent yaml
 def UUID = UUID.randomUUID().toString()
 pipeline {
   agent {
@@ -56,7 +58,7 @@ spec:
         type: Directory
     - name: var-lib-docker
       persistentVolumeClaim:
-        claimName: dind
+        claimName: dind-$PVC_ORDINAL
     - name: docker-bin
       emptyDir: {}
     - name: docker-sock
