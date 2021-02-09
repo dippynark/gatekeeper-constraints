@@ -1,3 +1,5 @@
+@Library('pipeline-library@main')
+
 // Ordinal to select DinD cache PVC
 def PVC_ORDINAL = "${currentBuild.number.toInteger() % 3}"
 // Prevent jenkins reusing agent yaml
@@ -76,6 +78,14 @@ spec:
       steps {
         // TODO: checkout master and merge PR
         git url: 'https://github.com/dippynark/gatekeeper.git', branch: "${ghprbSourceBranch}"
+      }
+    }
+    stage('test') {
+      steps {
+        container('dind') {
+          generate(workDir)
+          validate(workDir)
+        }
       }
     }
   }
