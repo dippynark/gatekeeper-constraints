@@ -1,8 +1,12 @@
 controller:
+  tag: 2.271
   testEnabled: false
-  # overwritePlugins: true
-  # overwritePluginsFromImage: true
-  additionalPlugins:
+  overwritePlugins: true
+  installPlugins:
+  - kubernetes:1.27.6
+  - workflow-aggregator:2.6
+  - git:4.5.2
+  - configuration-as-code:1.47
   - ghprb:1.42.0
   - github:1.33.0
   - pipeline-model-definition:1.8.3
@@ -21,4 +25,6 @@ controller:
   - workflow-cps-global-lib:2.17
   - credentials-binding:1.24
   - pipeline-model-extensions:1.8.3
+  - github-branch-source:2.10.1
+  - pipeline-utility-steps:2.6.1
   jenkinsUrl: https://jenkins.lukeaddison.co.uk

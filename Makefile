@@ -14,7 +14,7 @@ KPT_VERSION = 0.37.0
 GATEKEEPER_VALIDATE_VERSION = release-kpt-functions-v0.14.5
 KUBECTL_VERSION = 1.19.6
 JX_VERSION = 3.1.137
-JENKINS_VERSION = 3.0.14
+JENKINS_VERSION = 3.1.8
 
 all: test generate validate
 
