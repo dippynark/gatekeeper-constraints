@@ -1,11 +1,10 @@
+---
 # Source: nginx/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
   namespace: nginx
-  annotations:
-    configmanagement.gke.io/managed: 'disabled'
 spec:
   selector:
     matchLabels:

@@ -83,7 +83,7 @@ generate:
 			--create-missing-namespaces \
 			--clean
 	rm -r $(STAGING_DIR)
-	jx gitops annotate --dir $(CONFIGS_DIR)/namespaces/nginx configmanagement.gke.io/managed=disabled
+	#jx gitops annotate --dir $(CONFIGS_DIR)/namespaces/nginx configmanagement.gke.io/managed=disabled
 
 validate:
 	# https://googlecontainertools.github.io/kpt/guides/consumer/function/
