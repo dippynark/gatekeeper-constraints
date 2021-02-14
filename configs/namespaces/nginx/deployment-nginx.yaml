@@ -5,7 +5,7 @@ metadata:
   name: nginx
   namespace: nginx
   annotations:
-    configmanagement.gke.io/managed: 'a'
+    configmanagement.gke.io/managed: 'disabled'
 spec:
   selector:
     matchLabels:

@@ -4,7 +4,7 @@ metadata:
   name: pods
   namespace: nginx
   annotations:
-    configmanagement.gke.io/managed: 'a'
+    configmanagement.gke.io/managed: 'disabled'
 spec:
   hard:
     pods: "10"
