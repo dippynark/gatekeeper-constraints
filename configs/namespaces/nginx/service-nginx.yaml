@@ -1,10 +1,11 @@
----
 # Source: nginx/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx
   namespace: nginx
+  annotations:
+    configmanagement.gke.io/managed: 'a'
 spec:
   selector:
     app: nginx

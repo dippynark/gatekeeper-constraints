@@ -1,9 +1,10 @@
----
 apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: pods
   namespace: nginx
+  annotations:
+    configmanagement.gke.io/managed: 'a'
 spec:
   hard:
     pods: "10"
