@@ -1,9 +1,10 @@
----
 apiVersion: templates.gatekeeper.sh/v1beta1
 kind: ConstraintTemplate
 metadata:
   creationTimestamp: null
   name: poddenyhostnetwork
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 spec:
   crd:
     spec:

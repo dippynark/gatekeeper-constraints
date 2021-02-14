@@ -1,4 +1,3 @@
----
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: MutatingWebhookConfiguration
 metadata:
@@ -9,6 +8,8 @@ metadata:
     operator.istio.io/component: "Pilot"
     app: sidecar-injector
     release: istio
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 webhooks:
   - name: sidecar-injector.istio.io
     clientConfig:

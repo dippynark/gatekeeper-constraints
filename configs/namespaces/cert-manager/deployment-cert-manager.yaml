@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -9,6 +8,8 @@ metadata:
     app.kubernetes.io/name: cert-manager
   name: cert-manager
   namespace: cert-manager
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 spec:
   replicas: 1
   selector:

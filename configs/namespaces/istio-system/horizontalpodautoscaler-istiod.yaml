@@ -1,4 +1,3 @@
----
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
@@ -10,6 +9,8 @@ metadata:
     istio.io/rev: default
     install.operator.istio.io/owning-resource: unknown
     operator.istio.io/component: "Pilot"
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 spec:
   maxReplicas: 5
   minReplicas: 1

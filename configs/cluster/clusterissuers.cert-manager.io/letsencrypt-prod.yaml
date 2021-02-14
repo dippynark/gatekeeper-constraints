@@ -1,8 +1,9 @@
----
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory

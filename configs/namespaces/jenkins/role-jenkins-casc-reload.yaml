@@ -1,4 +1,3 @@
----
 # Source: jenkins/templates/rbac.yaml
 # The sidecar container which is responsible for reloading configuration changes
 # needs permissions to watch ConfigMaps
@@ -13,6 +12,8 @@ metadata:
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "jenkins"
     "app.kubernetes.io/component": "jenkins-controller"
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 rules:
   - apiGroups: [""]
     resources: ["configmaps"]

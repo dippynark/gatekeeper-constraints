@@ -1,9 +1,9 @@
----
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from-secret: cert-manager/cert-manager-webhook-ca
+    configmanagement.gke.io/managed: 'disabled'
   labels:
     app: cert-manager
     app.kubernetes.io/instance: cert-manager

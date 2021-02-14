@@ -1,9 +1,9 @@
----
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   annotations:
     cert-manager.io/inject-ca-from-secret: cert-manager/cert-manager-webhook-ca
+    configmanagement.gke.io/managed: 'disabled'
   labels:
     app: webhook
     app.kubernetes.io/component: webhook

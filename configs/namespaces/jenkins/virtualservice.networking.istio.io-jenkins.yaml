@@ -1,9 +1,10 @@
----
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: jenkins
   namespace: jenkins
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 spec:
   hosts:
     - jenkins.lukeaddison.co.uk

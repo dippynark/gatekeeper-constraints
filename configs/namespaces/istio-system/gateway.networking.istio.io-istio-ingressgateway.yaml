@@ -1,9 +1,10 @@
----
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: istio-ingressgateway
   namespace: istio-system
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 spec:
   selector:
     app: istio-ingressgateway

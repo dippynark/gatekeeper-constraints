@@ -1,9 +1,10 @@
----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: jenkins-lukeaddison-co-uk
   namespace: istio-system
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 spec:
   secretName: jenkins-lukeaddison-co-uk-tls
   issuerRef:

@@ -1,4 +1,3 @@
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -6,6 +5,8 @@ metadata:
   labels:
     app: istiod
     release: istio
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 rules:
   # sidecar injection controller
   - apiGroups: ["admissionregistration.k8s.io"]

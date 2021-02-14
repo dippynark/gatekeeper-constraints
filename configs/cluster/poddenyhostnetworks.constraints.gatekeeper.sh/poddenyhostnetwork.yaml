@@ -1,8 +1,9 @@
----
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: PodDenyHostNetwork
 metadata:
   name: poddenyhostnetwork
+  annotations:
+    configmanagement.gke.io/managed: 'disabled'
 spec:
   match:
     kinds:
