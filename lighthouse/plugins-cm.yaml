@@ -1,0 +1,95 @@
+apiVersion: v1
+data:
+  plugins.yaml: |
+    approve:
+    - lgtm_acts_as_approve: true
+      repos:
+      - dippynark/goldengoose
+      require_self_approval: true
+    - lgtm_acts_as_approve: true
+      repos:
+      - dippynark/home-environment
+      require_self_approval: true
+    - lgtm_acts_as_approve: true
+      repos:
+      - dippynark/kfmt
+      require_self_approval: true
+    cat: {}
+    cherry_pick_unapproved: {}
+    config_updater:
+      gzip: false
+    heart: {}
+    label:
+      additional_labels: null
+    owners: {}
+    plugins:
+      dippynark/goldengoose:
+      - approve
+      - assign
+      - blunderbuss
+      - help
+      - hold
+      - lgtm
+      - lifecycle
+      - override
+      - size
+      - trigger
+      - wip
+      - heart
+      - cat
+      - dog
+      - pony
+      dippynark/home-environment:
+      - approve
+      - assign
+      - blunderbuss
+      - help
+      - hold
+      - lgtm
+      - lifecycle
+      - override
+      - size
+      - trigger
+      - wip
+      - heart
+      - cat
+      - dog
+      - pony
+      dippynark/kfmt:
+      - approve
+      - assign
+      - blunderbuss
+      - help
+      - hold
+      - lgtm
+      - lifecycle
+      - override
+      - size
+      - trigger
+      - wip
+      - heart
+      - cat
+      - dog
+      - pony
+    requiresig: {}
+    sigmention: {}
+    size:
+      l: 0
+      m: 0
+      s: 0
+      xl: 0
+      xxl: 0
+    triggers:
+    - repos:
+      - dippynark/goldengoose
+    - repos:
+      - dippynark/home-environment
+    - repos:
+      - dippynark/kfmt
+    welcome:
+    - message_template: Welcome
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: plugins
+  namespace: lighthouse

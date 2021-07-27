@@ -1,0 +1,57 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    branch-protection:
+      protect-tested-repos: true
+    github:
+      LinkURL: null
+    in_repo_config:
+      enabled:
+        dippynark/goldengoose: true
+        dippynark/home-environment: true
+        dippynark/kfmt: true
+    plank: {}
+    pod_namespace: lighthouse
+    prowjob_namespace: lighthouse
+    push_gateway:
+      serve_metrics: false
+    tide:
+      context_options:
+        from-branch-protection: true
+        required-if-present-contexts: null
+        skip-unknown-contexts: false
+      merge_method:
+        dippynark/goldengoose: merge
+        dippynark/home-environment: merge
+        dippynark/kfmt: merge
+      queries:
+      - labels:
+        - approved
+        missingLabels:
+        - do-not-merge
+        - do-not-merge/hold
+        - do-not-merge/work-in-progress
+        - needs-ok-to-test
+        - needs-rebase
+        repos:
+        - dippynark/goldengoose
+        - dippynark/home-environment
+        - dippynark/kfmt
+      - labels:
+        - updatebot
+        missingLabels:
+        - do-not-merge
+        - do-not-merge/hold
+        - do-not-merge/work-in-progress
+        - needs-ok-to-test
+        - needs-rebase
+        repos:
+        - dippynark/goldengoose
+        - dippynark/home-environment
+        - dippynark/kfmt
+      target_url: https://tekton.lukeaddison.co.uk
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: config
+  namespace: lighthouse
